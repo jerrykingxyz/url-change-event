@@ -1,13 +1,3 @@
 {
-  "presets": [
-    "babel-preset-minify",
-    [
-      "@babel/env",
-      {
-        "targets": {
-          "browsers": ["IE >= 9"]
-        }
-      }
-    ]
-  ]
+  "presets": ["babel-preset-minify", "@babel/env"]
 }
