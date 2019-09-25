@@ -2,7 +2,7 @@
   "name": "url-change-event",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "dist/urlchangeevent.min.js",
   "scripts": {
     "lint": "eslint src",
     "build:dev": "ENV=dev babel src --out-file dist/urlchangeevent.js",
