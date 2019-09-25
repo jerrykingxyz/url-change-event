@@ -1,6 +1,6 @@
 {
   "name": "url-change-event",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/urlchangeevent.min.js",
   "scripts": {
