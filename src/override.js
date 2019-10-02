@@ -1,7 +1,5 @@
-let nowURL = window.location.href
-function updateNowURL() {
-  nowURL = window.location.href
-}
+import UrlChangeEvent from './UrlChangeEvent'
+import { nowURL, updateNowURL } from './utils/urlCache'
 
 export const originPushState = window.history.pushState.bind(window.history)
 window.history.pushState = function(state, title, url) {
