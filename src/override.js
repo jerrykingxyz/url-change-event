@@ -8,6 +8,7 @@ window.history.pushState = function(state, title, url) {
       newURL: url,
       oldURL: nowURL,
       cancelable: true,
+      action: 'pushState',
     })
   )
 
@@ -26,6 +27,7 @@ window.history.replaceState = function(state, title, url) {
       newURL: url,
       oldURL: nowURL,
       cancelable: true,
+      action: 'replaceState',
     })
   )
 

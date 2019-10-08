@@ -14,6 +14,7 @@ window.addEventListener('popstate', function() {
       oldURL: nowURL,
       newURL: window.location.pathname,
       cancelable: true,
+      action: 'popstate',
     })
   )
 
@@ -25,6 +26,7 @@ window.addEventListener('beforeunload', function() {
     new UrlChangeEvent({
       oldURL: nowURL,
       cancelable: true,
+      action: 'beforeunload',
     })
   )
 
