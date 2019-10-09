@@ -1,5 +1,5 @@
 import UrlChangeEvent from './UrlChangeEvent'
-import { cachePath, updateCacheState } from './utils/stateCache'
+import { cachePath, cacheIndex, updateCacheState } from './utils/stateCache'
 
 export const originPushState = window.history.pushState.bind(window.history)
 window.history.pushState = function(state, title, url) {
@@ -13,7 +13,7 @@ window.history.pushState = function(state, title, url) {
   )
 
   if (notCanceled) {
-    originPushState({ _index: window.history.length + 1, ...state }, title, url)
+    originPushState({ _index: cacheIndex + 1, ...state }, title, url)
     updateCacheState()
   }
 }
@@ -32,7 +32,7 @@ window.history.replaceState = function(state, title, url) {
   )
 
   if (notCanceled) {
-    originReplaceState({ _index: window.history.length, ...state }, title, url)
+    originReplaceState({ _index: cacheIndex, ...state }, title, url)
     updateCacheState()
   }
 }
