@@ -35,7 +35,7 @@ window.addEventListener('popstate', function(e) {
   updateCacheState()
 })
 
-window.addEventListener('beforeunload', function() {
+window.addEventListener('beforeunload', function(e) {
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
       oldURL: cachePath,
