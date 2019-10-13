@@ -1,5 +1,5 @@
 import UrlChangeEvent from './UrlChangeEvent'
-import { cachePath, cacheIndex, updateCacheState } from './utils/stateCache'
+import { cachePath, cacheIndex, updateCacheState } from './stateCache'
 
 export const originPushState = window.history.pushState.bind(window.history)
 window.history.pushState = function(state, title, url) {

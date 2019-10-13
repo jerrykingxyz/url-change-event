@@ -1,6 +1,6 @@
 import UrlChangeEvent from './UrlChangeEvent'
 import { originReplaceState } from './override'
-import { cachePath, cacheIndex, updateCacheState } from './utils/stateCache'
+import { cachePath, cacheIndex, updateCacheState } from './stateCache'
 
 export * from './override'
 
