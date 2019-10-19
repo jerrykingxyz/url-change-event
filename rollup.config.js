@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel'
 import { uglify } from 'rollup-plugin-uglify'
+import pkg from './package.json'
 
 export default [
   // nodejs & browsers
@@ -7,7 +8,7 @@ export default [
     input: 'src/index.js',
     output: {
       name: 'url-change-event',
-      file: `dist/url-change-event.js`,
+      file: pkg.main,
       format: 'umd',
     },
     plugins: [
@@ -20,8 +21,8 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: `dist/url-change-event.min.js`,
       name: 'url-change-event',
+      file: pkg.browser,
       format: 'umd',
     },
     plugins: [
@@ -35,7 +36,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: `dist/url-change-event.mjs`,
+      file: pkg.module,
       format: 'es',
     },
     plugins: [
