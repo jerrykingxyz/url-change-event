@@ -1,13 +1,13 @@
 {
   "name": "url-change-event",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
-  "main": "dist/urlchangeevent.min.js",
+  "main": "dist/url-change-event.js",
+  "module": "dist/url-change-event.mjs",
+  "sideEffects": true,
   "scripts": {
-    "lint": "eslint src",
-    "build:dev": "ENV=dev rollup -c",
-    "build:prod": "ENV=prod rollup -c",
-    "build": "npm run lint && npm run build:dev && npm run build:prod",
+    "lint": "prettier -l 'src/**/*.js' && eslint src",
+    "build": "npm run lint && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +23,10 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
+    "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0",
+    "karma": "^4.3.0",
+    "mocha": "^6.2.1",
     "prettier": "^1.18.2",
     "rollup": "^1.22.0",
     "rollup-plugin-babel": "^4.3.3",
