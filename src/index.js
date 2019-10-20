@@ -22,7 +22,6 @@ window.addEventListener('popstate', function(e) {
     new UrlChangeEvent({
       oldURL: cachePath,
       newURL: nowPath,
-      cancelable: true,
       action: 'popstate',
     })
   )
@@ -39,7 +38,7 @@ window.addEventListener('beforeunload', function(e) {
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
       oldURL: cachePath,
-      cancelable: true,
+      newURL: '',
       action: 'beforeunload',
     })
   )

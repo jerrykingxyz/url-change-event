@@ -7,7 +7,6 @@ window.history.pushState = function(state, title, url) {
     new UrlChangeEvent({
       newURL: url,
       oldURL: cachePath,
-      cancelable: true,
       action: 'pushState',
     })
   )
@@ -26,7 +25,6 @@ window.history.replaceState = function(state, title, url) {
     new UrlChangeEvent({
       newURL: url,
       oldURL: cachePath,
-      cancelable: true,
       action: 'replaceState',
     })
   )
