@@ -1,7 +1,7 @@
 {
   "name": "url-change-event",
   "version": "0.0.3",
-  "description": "",
+  "description": "a wrapper event that listen & control URL changes",
   "main": "dist/url-change-event.js",
   "module": "dist/url-change-event.mjs",
   "browser": "dist/url-change-event.min.js",

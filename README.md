@@ -1,5 +1,5 @@
 # url-change-event
-listen url change & prevent it
+a wrapper event that listen & control URL changes
 [中文](README_CN.md)
 
 ## Installation
@@ -24,9 +24,9 @@ window.addEventlistener('urlchangeevent', function(e) {
 ```
 ### UrlChangeEvent instance
 Properties
-* ```oldURL``` - the url before change, and value is __string__
-* ```nowURL``` - the url after change, and value is __string__ or __undefined__, when event.action is __beforeunload__ this value is __undefined__
-* ```action``` - the action that causes the url to change, and value in [***pushState*** | ***replaceState*** |***popstate*** | ***beforeunload***]
+* ```oldURL``` {__string__} - the url before change.
+* ```nowURL``` {__string__} - the url after change. __WARNING:__ when event.action is __beforeunload__, this value is empty string.
+* ```action``` {[pushState|replaceState|popstate|beforeunload]} - the action that causes the url to change.
 
 Method
 * ```preventDefault``` - prevent url change

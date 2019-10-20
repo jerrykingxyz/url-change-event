@@ -1,5 +1,5 @@
 # url-change-event
-监听url改变 & 阻止url改变
+监听和控制URL的更改事件
 
 ## 安装
 你可以通过 ```npm install url-change-event``` 引入
@@ -23,9 +23,9 @@ window.addEventlistener('urlchangeevent', function(e) {
 ```
 ### UrlChangeEvent 实例
 属性
-* ```oldURL``` - 变化前的URL, 值为 __string__
-* ```nowURL``` - 变化后的URL, 值为 __string__ 或 __undefined__，当event.action为 __beforeunload__ 时，此项值为 __undefined__
-* ```action``` - 导致URL改变的操作, 值为 [***pushState*** | ***replaceState*** |***popstate*** | ***beforeunload***]
+* ```oldURL``` {__string__} - 变化前的URL。
+* ```nowURL``` {__string__} - 变化后的URL。 __WARNING:__ 当event.action为 __beforeunload__ 时，此项值为空字符串。
+* ```action``` {[pushState|replaceState|popstate|beforeunload]} - 导致URL改变的操作。
 
 方法
 * ```preventDefault``` - 阻止URL改变
