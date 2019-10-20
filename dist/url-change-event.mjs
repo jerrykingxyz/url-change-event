@@ -196,7 +196,9 @@ function (_Event) {
 
     _classCallCheck(this, UrlChangeEvent);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(UrlChangeEvent).call(this, 'urlchangeevent', option));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UrlChangeEvent).call(this, 'urlchangeevent', _objectSpread2({
+      cancelable: true
+    }, option)));
     _this.newURL = option.newURL;
     _this.oldURL = option.oldURL;
     _this.action = option.action;
@@ -226,7 +228,6 @@ window.history.pushState = function (state, title, url) {
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
     newURL: url,
     oldURL: cachePath,
-    cancelable: true,
     action: 'pushState'
   }));
 
@@ -244,7 +245,6 @@ window.history.replaceState = function (state, title, url) {
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
     newURL: url,
     oldURL: cachePath,
-    cancelable: true,
     action: 'replaceState'
   }));
 
@@ -276,7 +276,6 @@ window.addEventListener('popstate', function (e) {
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
     oldURL: cachePath,
     newURL: nowPath,
-    cancelable: true,
     action: 'popstate'
   }));
 
@@ -291,7 +290,7 @@ window.addEventListener('popstate', function (e) {
 window.addEventListener('beforeunload', function (e) {
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
     oldURL: cachePath,
-    cancelable: true,
+    newURL: '',
     action: 'beforeunload'
   }));
 
