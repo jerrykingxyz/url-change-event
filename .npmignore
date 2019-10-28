@@ -1,6 +1,7 @@
 .idea/
 example/
 node_modules/
+script/
 src/
 test/
 .babelrc
