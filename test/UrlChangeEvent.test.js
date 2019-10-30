@@ -1,4 +1,4 @@
-import UrlChangeEvent from '../src/UrlChangeEvent.js'
+import UrlChangeEvent from '../src/UrlChangeEvent'
 
 const expect = chai.expect
 

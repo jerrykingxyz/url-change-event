@@ -2,8 +2,6 @@ import UrlChangeEvent from './UrlChangeEvent'
 import { originReplaceState } from './override'
 import { cachePath, cacheIndex, updateCacheState } from './stateCache'
 
-export * from './override'
-
 if (!window.history.state) {
   // init env
   originReplaceState({ _index: window.history.length }, null, null)

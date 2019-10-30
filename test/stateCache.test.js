@@ -1,22 +1,11 @@
-import { cacheIndex, cachePath, updateCacheState } from '../src/stateCache.js'
+import { cacheIndex, cachePath, updateCacheState } from '../src/stateCache'
 
 const expect = chai.expect
 
 describe('state cache test', function() {
-  beforeEach(function() {
-    if (!window.history.state) {
-      // init env
-      window.history.replaceState({ _index: window.history.length }, null, null)
-    }
-  })
-  it('not init state', function() {
-    expect(cacheIndex).to.be.undefined
-    expect(cachePath).to.be.undefined
-  })
-
-  it('after init state', function() {
+  it('index & path', function() {
     updateCacheState()
-    expect(cacheIndex).to.equal(1)
+    expect(cacheIndex).to.equal(window.history.length)
     expect(cachePath).to.equal(window.location.pathname)
   })
 })
