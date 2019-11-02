@@ -15,7 +15,7 @@ const contentTypeMap = {
 
 http
   .createServer(async function(request, response) {
-    let filename = request.url.substring(1)
+    let filename = request.url.split('?')[0].substring(1)
     let ext = filename.substring(filename.lastIndexOf('.') + 1)
 
     try {

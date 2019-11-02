@@ -42,6 +42,7 @@ window.addEventListener('beforeunload', function(e) {
   )
 
   if (!notCanceled) {
+    e.preventDefault()
     const confirmationMessage = 'o/'
     e.returnValue = confirmationMessage
     return confirmationMessage
