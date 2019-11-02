@@ -3,9 +3,10 @@ import { cachePath, cacheIndex, updateCacheState } from './stateCache'
 
 export const originPushState = window.history.pushState.bind(window.history)
 window.history.pushState = function(state, title, url) {
+  const absolutePath = new URL(url || '', window.location.href).pathname
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
-      newURL: url,
+      newURL: absolutePath,
       oldURL: cachePath,
       action: 'pushState',
     })
@@ -21,9 +22,10 @@ export const originReplaceState = window.history.replaceState.bind(
   window.history
 )
 window.history.replaceState = function(state, title, url) {
+  const absolutePath = new URL(url || '', window.location.href).pathname
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
-      newURL: url,
+      newURL: absolutePath,
       oldURL: cachePath,
       action: 'replaceState',
     })
