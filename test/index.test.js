@@ -5,7 +5,7 @@ import './stateCache.test'
 import './override.test'
 
 import { cacheIndex, cachePath } from '../src/stateCache'
-import { waitForPopstate } from './utils'
+import { waitForUrlChange, waitForPopstate } from './utils'
 
 const expect = chai.expect
 const initPath = cachePath
@@ -59,7 +59,7 @@ describe('popstate test', function() {
     await waitForPopstate()
   })
 
-  /*  it('prevent history change test', async function() {
+  it('prevent history change test', async function() {
     const nextState = '/nextState'
     window.history.pushState(null, null, nextState)
     window.history.back()
@@ -68,8 +68,8 @@ describe('popstate test', function() {
     let flag = false
     const listener = function(event) {
       flag = true
-      expect(event.oldURL).to.equal(nextState)
-      expect(event.newURL).to.equal(initPath)
+      expect(event.oldURL).to.equal(initPath)
+      expect(event.newURL).to.equal(nextState)
       expect(event.action).to.equal('popstate')
       event.preventDefault()
     }
@@ -80,7 +80,7 @@ describe('popstate test', function() {
     expect(flag).to.equal(true)
     expect(cachePath).to.equal(initPath)
     expect(cacheIndex).to.equal(initIndex)
-  })*/
+  })
 })
 
 describe('before unload test', function() {
