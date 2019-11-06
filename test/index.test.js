@@ -1,3 +1,4 @@
+import './reset.js'
 // import src/index.js can init brower env
 import '../src/index'
 import './UrlChangeEvent.test'
