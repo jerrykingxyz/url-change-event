@@ -225,8 +225,9 @@ function updateCacheState() {
 var originPushState = window.history.pushState.bind(window.history);
 
 window.history.pushState = function (state, title, url) {
+  var absolutePath = new URL(url || '', window.location.href).pathname;
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-    newURL: url,
+    newURL: absolutePath,
     oldURL: cachePath,
     action: 'pushState'
   }));
@@ -242,8 +243,9 @@ window.history.pushState = function (state, title, url) {
 var originReplaceState = window.history.replaceState.bind(window.history);
 
 window.history.replaceState = function (state, title, url) {
+  var absolutePath = new URL(url || '', window.location.href).pathname;
   var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-    newURL: url,
+    newURL: absolutePath,
     oldURL: cachePath,
     action: 'replaceState'
   }));
@@ -295,10 +297,9 @@ window.addEventListener('beforeunload', function (e) {
   }));
 
   if (!notCanceled) {
+    e.preventDefault();
     var confirmationMessage = 'o/';
     e.returnValue = confirmationMessage;
     return confirmationMessage;
   }
 });
-
-export { originPushState, originReplaceState };

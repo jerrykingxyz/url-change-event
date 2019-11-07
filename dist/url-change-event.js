@@ -1,8 +1,7 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global['url-change-event'] = {}));
-}(this, function (exports) { 'use strict';
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+}(function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -231,8 +230,9 @@
   var originPushState = window.history.pushState.bind(window.history);
 
   window.history.pushState = function (state, title, url) {
+    var absolutePath = new URL(url || '', window.location.href).pathname;
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      newURL: url,
+      newURL: absolutePath,
       oldURL: cachePath,
       action: 'pushState'
     }));
@@ -248,8 +248,9 @@
   var originReplaceState = window.history.replaceState.bind(window.history);
 
   window.history.replaceState = function (state, title, url) {
+    var absolutePath = new URL(url || '', window.location.href).pathname;
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      newURL: url,
+      newURL: absolutePath,
       oldURL: cachePath,
       action: 'replaceState'
     }));
@@ -301,15 +302,11 @@
     }));
 
     if (!notCanceled) {
+      e.preventDefault();
       var confirmationMessage = 'o/';
       e.returnValue = confirmationMessage;
       return confirmationMessage;
     }
   });
-
-  exports.originPushState = originPushState;
-  exports.originReplaceState = originReplaceState;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
