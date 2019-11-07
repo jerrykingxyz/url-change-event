@@ -1,7 +1,5 @@
 import { cacheIndex, cachePath, updateCacheState } from '../src/stateCache'
 
-const expect = chai.expect
-
 describe('state cache test', function() {
   it('index & path', function() {
     updateCacheState()

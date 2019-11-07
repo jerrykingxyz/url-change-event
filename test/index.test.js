@@ -8,7 +8,6 @@ import './override.test'
 import { cacheIndex, cachePath } from '../src/stateCache'
 import { waitForUrlChange, waitForPopstate } from './utils'
 
-const expect = chai.expect
 const initPath = cachePath
 const initIndex = cacheIndex
 

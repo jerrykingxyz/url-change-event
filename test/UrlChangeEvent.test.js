@@ -1,7 +1,5 @@
 import UrlChangeEvent from '../src/UrlChangeEvent'
 
-const expect = chai.expect
-
 describe('UrlChangeEvent test', function() {
   it('event struct', function() {
     const oldURL = {}
