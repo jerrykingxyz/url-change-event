@@ -1,10 +1,10 @@
 .idea/
 example/
 node_modules/
-script/
 src/
 test/
 .babelrc
 .eslintrc
 .prettierrc
+karma.conf.js
 rollup.config.js
