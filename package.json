@@ -5,6 +5,7 @@
   "main": "dist/url-change-event.js",
   "module": "dist/url-change-event.mjs",
   "browser": "dist/url-change-event.min.js",
+  "typings": "./index.d.ts",
   "sideEffects": true,
   "scripts": {
     "lint": "prettier -l 'src/**/*.js' && eslint src",
