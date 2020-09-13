@@ -1,6 +1,6 @@
 {
   "name": "url-change-event",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "a wrapper event that listen & control URL changes",
   "main": "dist/url-change-event.js",
   "module": "dist/url-change-event.mjs",
@@ -10,7 +10,8 @@
   "scripts": {
     "lint": "prettier -l 'src/**/*.js' && eslint src",
     "build": "rollup -c",
-    "test": "npm run lint && karma start"
+    "karma": "karma start",
+    "test": "npm run lint && npm run karma"
   },
   "repository": {
     "type": "git",

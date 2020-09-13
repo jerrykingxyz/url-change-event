@@ -1,7 +1,11 @@
-interface UrlChangeEvent extends Event {
-  newURL: string
-  oldURL: string
+interface IOption {
+  oldURL: URL
+  newURL: URL | null
   action: 'pushState' | 'replaceState' | 'popstate' | 'beforeunload'
+}
+
+interface UrlChangeEvent extends Event, IOption {
+  constructor(option: IOption)
 }
 
 export { UrlChangeEvent }

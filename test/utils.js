@@ -1,21 +1,35 @@
-export const waitForUrlChange = function(listener) {
+export function expectURLEqual(url1, url2) {
+  expect(url1.href).to.equal(url2.href)
+}
+
+export function waitForUrlChange(trigger, onChange) {
   return new Promise(res => {
-    const newListener = function(event) {
-      listener(event)
-      window.removeEventListener('urlchangeevent', newListener)
+    const callback = function(event) {
+      if (typeof onChange === 'function') {
+        onChange(event)
+      }
+      window.removeEventListener('urlchangeevent', callback)
       res()
     }
-    window.addEventListener('urlchangeevent', newListener)
+    window.addEventListener('urlchangeevent', callback)
+    if (typeof trigger === 'function') {
+      trigger()
+    }
   })
 }
 
-export const waitForPopstate = function() {
+export function waitForPopstate(trigger, onChange) {
   return new Promise(res => {
-    const callback = function() {
-      res()
+    const callback = function(event) {
+      if (typeof onChange === 'function') {
+        onChange(event)
+      }
       window.removeEventListener('popstate', callback)
+      res()
     }
-
     window.addEventListener('popstate', callback)
+    if (typeof trigger === 'function') {
+      trigger()
+    }
   })
 }

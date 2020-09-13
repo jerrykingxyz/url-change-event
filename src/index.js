@@ -1,16 +1,10 @@
 import UrlChangeEvent from './UrlChangeEvent'
-import { originReplaceState } from './override'
-import { cachePath, cacheIndex, updateCacheState } from './stateCache'
-
-if (!window.history.state) {
-  // init env
-  originReplaceState({ _index: window.history.length }, null, null)
-}
-updateCacheState()
+import { cacheURL, cacheIndex, updateCacheState } from './stateCache'
+import './override'
 
 window.addEventListener('popstate', function(e) {
   const nowIndex = window.history.state._index
-  const nowPath = window.location.pathname
+  const nowURL = new URL(window.location)
   if (nowIndex === cacheIndex) {
     e.stopImmediatePropagation()
     return
@@ -18,8 +12,8 @@ window.addEventListener('popstate', function(e) {
 
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
-      oldURL: cachePath,
-      newURL: nowPath,
+      oldURL: cacheURL,
+      newURL: nowURL,
       action: 'popstate',
     })
   )
@@ -35,8 +29,8 @@ window.addEventListener('popstate', function(e) {
 window.addEventListener('beforeunload', function(e) {
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
-      oldURL: cachePath,
-      newURL: '',
+      oldURL: cacheURL,
+      newURL: null,
       action: 'beforeunload',
     })
   )

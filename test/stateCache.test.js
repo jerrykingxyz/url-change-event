@@ -1,9 +1,9 @@
-import { cacheIndex, cachePath, updateCacheState } from '../src/stateCache'
+import { cacheIndex, cacheURL, updateCacheState } from '../src/stateCache'
 
 describe('state cache test', function() {
   it('index & path', function() {
     updateCacheState()
-    expect(cacheIndex).to.equal(window.history.state._index)
-    expect(cachePath).to.equal(window.location.pathname)
+    expect(cacheIndex).to.equal(window.history.length)
+    expect(cacheURL.href).to.equal(window.location.href)
   })
 })
