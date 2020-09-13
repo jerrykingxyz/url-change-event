@@ -24,8 +24,8 @@ window.addEventlistener('urlchangeevent', function(e) {
 ```
 ### UrlChangeEvent instance
 Properties
-* ```oldURL``` {__string__} - the url before change.
-* ```nowURL``` {__string__} - the url after change. __WARNING:__ when event.action is __beforeunload__, this value is empty string.
+* ```oldURL``` {__URL__} - the url before change.
+* ```nowURL``` {__URL__ | __null__} - the url after change. __WARNING:__ when event.action is __beforeunload__, this value is null.
 * ```action``` {[pushState|replaceState|popstate|beforeunload]} - the action that causes the url to change.
 
 Method
