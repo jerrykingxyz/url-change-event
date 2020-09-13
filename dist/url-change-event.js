@@ -1,7 +1,7 @@
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
-}(function () { 'use strict';
+}((function () { 'use strict';
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -220,20 +220,13 @@
     return UrlChangeEvent;
   }(_wrapNativeSuper(Event));
 
-  var cachePath;
-  var cacheIndex;
-  function updateCacheState() {
-    cachePath = window.location.pathname;
-    cacheIndex = window.history.state._index;
-  }
-
   var originPushState = window.history.pushState.bind(window.history);
 
   window.history.pushState = function (state, title, url) {
-    var absolutePath = new URL(url || '', window.location.href).pathname;
+    var nowURL = new URL(url || '', window.location.href);
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      newURL: absolutePath,
-      oldURL: cachePath,
+      newURL: nowURL,
+      oldURL: cacheURL,
       action: 'pushState'
     }));
 
@@ -248,10 +241,10 @@
   var originReplaceState = window.history.replaceState.bind(window.history);
 
   window.history.replaceState = function (state, title, url) {
-    var absolutePath = new URL(url || '', window.location.href).pathname;
+    var nowURL = new URL(url || '', window.location.href);
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      newURL: absolutePath,
-      oldURL: cachePath,
+      newURL: nowURL,
+      oldURL: cacheURL,
       action: 'replaceState'
     }));
 
@@ -263,17 +256,30 @@
     }
   };
 
-  if (!window.history.state) {
-    // init env
-    originReplaceState({
-      _index: window.history.length
-    }, null, null);
+  var cacheURL;
+  var cacheIndex;
+
+  function initCache() {
+    var state = window.history.state;
+
+    if (!state || typeof state._index !== 'number') {
+      originReplaceState(_objectSpread2({
+        _index: window.history.length
+      }, state), null, null);
+    }
+
+    updateCacheState();
   }
 
-  updateCacheState();
+  initCache();
+  function updateCacheState() {
+    cacheURL = new URL(window.location.href);
+    cacheIndex = window.history.state._index;
+  }
+
   window.addEventListener('popstate', function (e) {
     var nowIndex = window.history.state._index;
-    var nowPath = window.location.pathname;
+    var nowURL = new URL(window.location);
 
     if (nowIndex === cacheIndex) {
       e.stopImmediatePropagation();
@@ -281,8 +287,8 @@
     }
 
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      oldURL: cachePath,
-      newURL: nowPath,
+      oldURL: cacheURL,
+      newURL: nowURL,
       action: 'popstate'
     }));
 
@@ -296,8 +302,8 @@
   });
   window.addEventListener('beforeunload', function (e) {
     var notCanceled = window.dispatchEvent(new UrlChangeEvent({
-      oldURL: cachePath,
-      newURL: '',
+      oldURL: cacheURL,
+      newURL: null,
       action: 'beforeunload'
     }));
 
@@ -309,4 +315,4 @@
     }
   });
 
-}));
+})));
