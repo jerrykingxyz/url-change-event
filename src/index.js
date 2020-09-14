@@ -1,8 +1,9 @@
 import UrlChangeEvent from './UrlChangeEvent'
-import { cacheURL, cacheIndex, updateCacheState } from './stateCache'
+import { initState, cacheURL, cacheIndex, updateCacheState } from './stateCache'
 import './override'
 
 window.addEventListener('popstate', function(e) {
+  initState()
   const nowIndex = window.history.state._index
   const nowURL = new URL(window.location)
   if (nowIndex === cacheIndex) {

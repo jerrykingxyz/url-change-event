@@ -258,8 +258,7 @@
 
   var cacheURL;
   var cacheIndex;
-
-  function initCache() {
+  function initState() {
     var state = window.history.state;
 
     if (!state || typeof state._index !== 'number') {
@@ -267,17 +266,16 @@
         _index: window.history.length
       }, state), null, null);
     }
-
-    updateCacheState();
   }
-
-  initCache();
   function updateCacheState() {
     cacheURL = new URL(window.location.href);
     cacheIndex = window.history.state._index;
   }
+  initState();
+  updateCacheState();
 
   window.addEventListener('popstate', function (e) {
+    initState();
     var nowIndex = window.history.state._index;
     var nowURL = new URL(window.location);
 
