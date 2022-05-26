@@ -5,7 +5,7 @@ interface IOption {
 }
 
 interface UrlChangeEvent extends Event, IOption {
-  constructor(option: IOption)
+  constructor(option: IOption) : any
 }
 
 export { UrlChangeEvent }
