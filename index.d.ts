@@ -4,8 +4,16 @@ interface IOption {
   action: 'pushState' | 'replaceState' | 'popstate' | 'beforeunload'
 }
 
-interface UrlChangeEvent extends Event, IOption {
-  constructor(option: IOption)
+export interface UrlChangeEvent extends Event, IOption {
+  constructor(option: IOption): void
 }
 
-export { UrlChangeEvent }
+declare global {
+  interface Window {
+    addEventListener(
+      type: 'urlchangeevent',
+      callback: (event: UrlChangeEvent) => void,
+      options?: boolean | AddEventListenerOptions
+    ): void
+  }
+}
