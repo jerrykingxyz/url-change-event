@@ -18,7 +18,7 @@ or
 
 ## Usage
 ```javascript
-window.addEventlistener('urlchangeevent', function(e) {
+window.addEventListener('urlchangeevent', function(e) {
     // your code here
 })
 ```
