@@ -24,7 +24,7 @@ window.addEventListener('urlchangeevent', function(e) {
 ### UrlChangeEvent 实例
 属性
 * ```oldURL``` {__URL__} - 变化前的URL。
-* ```nowURL``` {__URL__ | __null__} - 变化后的URL。 __WARNING:__ 当event.action为 __beforeunload__ 时，此项值为null。
+* ```newURL``` {__URL__ | __null__} - 变化后的URL。 __WARNING:__ 当event.action为 __beforeunload__ 时，此项值为null。
 * ```action``` {[pushState|replaceState|popstate|beforeunload]} - 导致URL改变的操作。
 
 方法
