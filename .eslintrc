@@ -1,6 +1,5 @@
 {
-  "env": { "es6": true, "browser": true },
-  "parser": "babel-eslint",
+  "env": { "es2022": true, "browser": true },
   "rules": {
     "semi": ["error", "never"]
   },

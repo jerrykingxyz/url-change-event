@@ -2,7 +2,7 @@ import UrlChangeEvent from './UrlChangeEvent'
 import { initState, cacheURL, cacheIndex, updateCacheState } from './stateCache'
 import './override'
 
-window.addEventListener('popstate', function(e) {
+window.addEventListener('popstate', function (e) {
   initState()
   const nowIndex = window.history.state._index
   const nowURL = new URL(window.location)
@@ -27,7 +27,7 @@ window.addEventListener('popstate', function(e) {
   updateCacheState()
 })
 
-window.addEventListener('beforeunload', function(e) {
+window.addEventListener('beforeunload', function (e) {
   const notCanceled = window.dispatchEvent(
     new UrlChangeEvent({
       oldURL: cacheURL,

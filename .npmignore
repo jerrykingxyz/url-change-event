@@ -3,6 +3,7 @@
 example/
 node_modules/
 src/
+dist/url-change-event.min.js
 test/
 .babelrc
 .eslintrc
