@@ -4,9 +4,7 @@ interface IOption {
   action: 'pushState' | 'replaceState' | 'popstate' | 'beforeunload'
 }
 
-export interface UrlChangeEvent extends Event, IOption {
-  constructor(option: IOption): void
-}
+export type UrlChangeEvent = Event & IOption
 
 declare global {
   interface Window {
