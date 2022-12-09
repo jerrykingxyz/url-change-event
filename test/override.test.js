@@ -4,17 +4,17 @@ import { expectURLEqual, waitForUrlChange, waitForPopstate } from './utils'
 const initURL = cacheURL
 const initIndex = cacheIndex
 
-describe('override push state method test', function() {
-  it('absolute path test', async function() {
+describe('override push state method test', function () {
+  it('absolute path test', async function () {
     const pushPath = '/pushPath'
     const pushURL = new URL(pushPath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.pushState(null, null, pushPath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, pushURL)
@@ -26,7 +26,7 @@ describe('override push state method test', function() {
     expect(cacheIndex).to.equal(initIndex + 1)
     expectURLEqual(cacheURL, pushURL)
 
-    await waitForPopstate(function() {
+    await waitForPopstate(function () {
       window.history.back()
     })
 
@@ -34,15 +34,15 @@ describe('override push state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('relative path test', async function() {
+  it('relative path test', async function () {
     const pushPath = 'pushPath'
     const pushURL = new URL(pushPath, window.location.href)
     let flag = false
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.pushState(null, null, pushPath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, pushURL)
@@ -54,7 +54,7 @@ describe('override push state method test', function() {
     expect(cacheIndex).to.equal(initIndex + 1)
     expectURLEqual(cacheURL, pushURL)
 
-    await waitForPopstate(function() {
+    await waitForPopstate(function () {
       window.history.back()
     })
 
@@ -62,15 +62,15 @@ describe('override push state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('prevent absolute path change test', async function() {
+  it('prevent absolute path change test', async function () {
     const pushPath = '/pushPath'
     const pushURL = new URL(pushPath, window.location.href)
     let flag = false
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.pushState(null, null, pushPath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, pushURL)
@@ -84,16 +84,16 @@ describe('override push state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('prevent relative path change test', async function() {
+  it('prevent relative path change test', async function () {
     const pushPath = 'pushPath'
     const pushURL = new URL(pushPath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.pushState(null, null, pushPath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, pushURL)
@@ -108,17 +108,17 @@ describe('override push state method test', function() {
   })
 })
 
-describe('override replace state method test', function() {
-  it('absolute path test', async function() {
+describe('override replace state method test', function () {
+  it('absolute path test', async function () {
     const replacePath = '/replacePath'
     const replaceURL = new URL(replacePath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.replaceState(null, null, replacePath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, replaceURL)
@@ -130,7 +130,7 @@ describe('override replace state method test', function() {
     expect(cacheIndex).to.equal(initIndex)
     expectURLEqual(cacheURL, replaceURL)
 
-    await waitForUrlChange(function() {
+    await waitForUrlChange(function () {
       window.history.replaceState(null, null, initURL.href)
     })
 
@@ -138,16 +138,16 @@ describe('override replace state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('relative path test', async function() {
+  it('relative path test', async function () {
     const replacePath = 'replacePath'
     const replaceURL = new URL(replacePath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.replaceState(null, null, replacePath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, replaceURL)
@@ -159,7 +159,7 @@ describe('override replace state method test', function() {
     expect(cacheIndex).to.equal(initIndex)
     expectURLEqual(cacheURL, replaceURL)
 
-    await waitForUrlChange(function() {
+    await waitForUrlChange(function () {
       window.history.replaceState(null, null, initURL.href)
     })
 
@@ -167,16 +167,16 @@ describe('override replace state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('prevent absolute path change test', async function() {
+  it('prevent absolute path change test', async function () {
     const replacePath = '/replacePath'
     const replaceURL = new URL(replacePath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.replaceState(null, null, replacePath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, replaceURL)
@@ -190,16 +190,16 @@ describe('override replace state method test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('prevent relative path change test', async function() {
+  it('prevent relative path change test', async function () {
     const replacePath = 'replacePath'
     const replaceURL = new URL(replacePath, window.location.href)
     let flag = false
 
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.replaceState(null, null, replacePath)
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, replaceURL)

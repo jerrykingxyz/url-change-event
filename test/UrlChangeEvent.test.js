@@ -1,7 +1,7 @@
 import UrlChangeEvent from '../src/UrlChangeEvent'
 
-describe('UrlChangeEvent test', function() {
-  it('event struct', function() {
+describe('UrlChangeEvent test', function () {
+  it('event struct', function () {
     const oldURL = {}
     const newURL = {}
     const action = {}
@@ -16,12 +16,12 @@ describe('UrlChangeEvent test', function() {
     expect(event.action).to.equal(action)
   })
 
-  it('event default cancelable is true', function() {
+  it('event default cancelable is true', function () {
     const event = new UrlChangeEvent()
     expect(event.cancelable).to.equal(true)
   })
 
-  it('event set cancelable', function() {
+  it('event set cancelable', function () {
     const event = new UrlChangeEvent({ cancelable: false })
     expect(event.cancelable).to.equal(false)
   })

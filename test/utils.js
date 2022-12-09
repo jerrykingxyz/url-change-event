@@ -3,8 +3,8 @@ export function expectURLEqual(url1, url2) {
 }
 
 export function waitForUrlChange(trigger, onChange) {
-  return new Promise(res => {
-    const callback = function(event) {
+  return new Promise((res) => {
+    const callback = function (event) {
       if (typeof onChange === 'function') {
         onChange(event)
       }
@@ -19,8 +19,8 @@ export function waitForUrlChange(trigger, onChange) {
 }
 
 export function waitForPopstate(trigger, onChange) {
-  return new Promise(res => {
-    const callback = function(event) {
+  return new Promise((res) => {
+    const callback = function (event) {
       if (typeof onChange === 'function') {
         onChange(event)
       }

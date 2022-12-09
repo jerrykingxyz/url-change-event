@@ -10,18 +10,18 @@ import { expectURLEqual, waitForUrlChange, waitForPopstate } from './utils'
 const initURL = cacheURL
 const initIndex = cacheIndex
 
-describe('popstate test', function() {
-  it('history back test', async function() {
+describe('popstate test', function () {
+  it('history back test', async function () {
     const nextPath = '/nextState'
     const nextURL = new URL(nextPath, window.location.href)
     window.history.pushState(null, null, nextPath)
 
     let flag = false
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.back()
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, nextURL)
         expectURLEqual(event.newURL, initURL)
@@ -34,20 +34,20 @@ describe('popstate test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('history forward test', async function() {
+  it('history forward test', async function () {
     const nextPath = '/nextState'
     const nextURL = new URL(nextPath, window.location.href)
     window.history.pushState(null, null, nextPath)
-    await waitForPopstate(function() {
+    await waitForPopstate(function () {
       window.history.back()
     })
 
     let flag = false
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.forward()
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, nextURL)
@@ -59,7 +59,7 @@ describe('popstate test', function() {
     expect(cacheIndex).to.equal(initIndex + 1)
     expectURLEqual(cacheURL, nextURL)
 
-    await waitForPopstate(function() {
+    await waitForPopstate(function () {
       window.history.back()
     })
 
@@ -67,20 +67,20 @@ describe('popstate test', function() {
     expectURLEqual(cacheURL, initURL)
   })
 
-  it('prevent history change test', async function() {
+  it('prevent history change test', async function () {
     const nextPath = '/nextState'
     const nextURL = new URL(nextPath, window.location.href)
     window.history.pushState(null, null, nextPath)
-    await waitForPopstate(function() {
+    await waitForPopstate(function () {
       window.history.back()
     })
 
     let flag = false
     await waitForUrlChange(
-      function() {
+      function () {
         window.history.forward()
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expectURLEqual(event.newURL, nextURL)
@@ -95,17 +95,17 @@ describe('popstate test', function() {
   })
 })
 
-describe('before unload test', function() {
-  it('event test', async function() {
+describe('before unload test', function () {
+  it('event test', async function () {
     let flag = false
     let notCanceled = false
     await waitForUrlChange(
-      function() {
+      function () {
         notCanceled = window.dispatchEvent(
           new Event('beforeunload', { cancelable: true })
         )
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expect(event.newURL).to.equal(null)
@@ -117,17 +117,17 @@ describe('before unload test', function() {
     expect(notCanceled).to.equal(true)
   })
 
-  it('prevent event test', async function() {
+  it('prevent event test', async function () {
     let flag = false
     let notCanceled = true
 
     await waitForUrlChange(
-      function() {
+      function () {
         notCanceled = window.dispatchEvent(
           new Event('beforeunload', { cancelable: true })
         )
       },
-      function(event) {
+      function (event) {
         flag = true
         expectURLEqual(event.oldURL, initURL)
         expect(event.newURL).to.equal(null)
