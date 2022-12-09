@@ -5,7 +5,12 @@ import './stateCache.test'
 import './override.test'
 
 import { cacheIndex, cacheURL } from '../src/stateCache'
-import { expectURLEqual, waitForUrlChange, waitForPopstate } from './utils'
+import {
+  sleep,
+  expectURLEqual,
+  waitForUrlChange,
+  waitForPopstate,
+} from './utils'
 
 const initURL = cacheURL
 const initIndex = cacheIndex
@@ -92,6 +97,46 @@ describe('popstate test', function () {
     expect(flag).to.equal(true)
     expect(cacheIndex).to.equal(initIndex)
     expectURLEqual(cacheURL, initURL)
+  })
+
+  it('prevent history change without popstate test', async function () {
+    const nextPath = '/nextState'
+    const nextURL = new URL(nextPath, window.location.href)
+    window.history.pushState(null, null, nextPath)
+
+    let popstateTimes = 0
+    const onPopstate = function () {
+      popstateTimes++
+    }
+    window.addEventListener('popstate', onPopstate)
+
+    await waitForPopstate(function () {
+      window.history.back()
+    })
+
+    expect(popstateTimes).to.equal(1)
+
+    let flag = false
+    await waitForUrlChange(
+      function () {
+        window.history.back()
+      },
+      function (event) {
+        flag = true
+        expectURLEqual(event.oldURL, initURL)
+        expectURLEqual(event.newURL, nextURL)
+        expect(event.action).to.equal('popstate')
+        event.preventDefault()
+      }
+    )
+
+    // wait the popstate run finish
+    await sleep(400)
+    expect(popstateTimes).to.equal(1)
+    expect(flag).to.equal(true)
+    expect(cacheIndex).to.equal(initIndex)
+    expectURLEqual(cacheURL, initURL)
+    window.removeEventListener('popstate', onPopstate)
   })
 })
 

@@ -1,3 +1,7 @@
+export function sleep(time) {
+  return new Promise((res) => setTimeout(res, time))
+}
+
 export function expectURLEqual(url1, url2) {
   expect(url1.href).to.equal(url2.href)
 }
