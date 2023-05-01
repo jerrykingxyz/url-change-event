@@ -13,5 +13,11 @@ declare global {
       callback: (event: UrlChangeEvent) => void,
       options?: boolean | AddEventListenerOptions
     ): void
+    
+    removeEventListener(
+      type: "urlchangeevent",
+      callback: (event: UrlChangeEvent) => void,
+      options?: boolean | AddEventListenerOptions
+    ): void;
   }
 }
