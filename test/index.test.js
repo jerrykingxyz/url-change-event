@@ -110,12 +110,6 @@ describe('popstate test', function () {
     }
     window.addEventListener('popstate', onPopstate)
 
-    await waitForPopstate(function () {
-      window.history.back()
-    })
-
-    expect(popstateTimes).to.equal(1)
-
     let flag = false
     await waitForUrlChange(
       function () {
@@ -123,17 +117,21 @@ describe('popstate test', function () {
       },
       function (event) {
         flag = true
-        expectURLEqual(event.oldURL, initURL)
-        expectURLEqual(event.newURL, nextURL)
+        expectURLEqual(event.oldURL, nextURL)
+        expectURLEqual(event.newURL, initURL)
         expect(event.action).to.equal('popstate')
         event.preventDefault()
       }
     )
+    expect(flag).to.equal(true)
 
     // wait the popstate run finish
     await sleep(400)
+    await waitForPopstate(function () {
+      window.history.back()
+    })
+
     expect(popstateTimes).to.equal(1)
-    expect(flag).to.equal(true)
     expect(cacheIndex).to.equal(initIndex)
     expectURLEqual(cacheURL, initURL)
     window.removeEventListener('popstate', onPopstate)

@@ -1,9 +1,10 @@
 {
-  "env": { "es2022": true, "browser": true },
+  "env": { "es6": true, "browser": true },
   "rules": {
     "semi": ["error", "never"]
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2020
   }
 }
