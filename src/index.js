@@ -4,7 +4,7 @@ import './override'
 
 window.addEventListener('popstate', function (e) {
   initState()
-  const nowIndex = window.history.state._index
+  const nowIndex = window.history.state?._index
   const nowURL = new URL(window.location)
   if (nowIndex === cacheIndex) {
     e.stopImmediatePropagation()
