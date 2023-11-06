@@ -12,7 +12,7 @@ export function initState() {
 
 export function updateCacheState() {
   cacheURL = new URL(window.location.href)
-  cacheIndex = window.history.state?._index
+  cacheIndex = window.history.state && window.history.state._index
 }
 
 initState()
