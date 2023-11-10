@@ -24,7 +24,7 @@ window.history.pushState = function (state, title, url) {
 
   if (notCanceled) {
     originPushState({ _index: cacheIndex + 1, ...state }, title, url);
-    updateCacheState();
+    updateCacheState(cacheIndex + 1);
   }
 };
 
@@ -43,7 +43,7 @@ window.history.replaceState = function (state, title, url) {
 
   if (notCanceled) {
     originReplaceState({ _index: cacheIndex, ...state }, title, url);
-    updateCacheState();
+    updateCacheState(cacheIndex);
   }
 };
 
@@ -53,21 +53,22 @@ let cacheIndex;
 function initState() {
   const state = window.history.state;
   if (!state || typeof state._index !== 'number') {
-    originReplaceState({ _index: window.history.length, ...state }, '');
+    const _index = window.history.length;
+    originReplaceState({ _index, ...state }, '');
+    return _index
   }
+  return state._index
 }
 
-function updateCacheState() {
+function updateCacheState(index) {
   cacheURL = new URL(window.location.href);
-  cacheIndex = window.history.state._index;
+  cacheIndex = index;
 }
 
-initState();
-updateCacheState();
+updateCacheState(initState());
 
 window.addEventListener('popstate', function (e) {
-  initState();
-  const nowIndex = window.history.state._index;
+  const nowIndex = initState();
   const nowURL = new URL(window.location);
   if (nowIndex === cacheIndex) {
     e.stopImmediatePropagation();
@@ -87,7 +88,7 @@ window.addEventListener('popstate', function (e) {
     window.history.go(cacheIndex - nowIndex);
     return
   }
-  updateCacheState();
+  updateCacheState(nowIndex);
 });
 
 window.addEventListener('beforeunload', function (e) {
