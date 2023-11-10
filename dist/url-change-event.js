@@ -53,7 +53,7 @@ let cacheIndex;
 function initState() {
   const state = window.history.state;
   if (!state || typeof state._index !== 'number') {
-    originReplaceState({ _index: window.history.length, ...state }, null, null);
+    originReplaceState({ _index: window.history.length, ...state }, '');
   }
 }
 
