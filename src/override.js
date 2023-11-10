@@ -14,7 +14,7 @@ window.history.pushState = function (state, title, url) {
 
   if (notCanceled) {
     originPushState({ _index: cacheIndex + 1, ...state }, title, url)
-    updateCacheState()
+    updateCacheState(cacheIndex + 1)
   }
 }
 
@@ -33,6 +33,6 @@ window.history.replaceState = function (state, title, url) {
 
   if (notCanceled) {
     originReplaceState({ _index: cacheIndex, ...state }, title, url)
-    updateCacheState()
+    updateCacheState(cacheIndex)
   }
 }

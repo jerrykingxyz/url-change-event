@@ -6,14 +6,16 @@ export let cacheIndex
 export function initState() {
   const state = window.history.state
   if (!state || typeof state._index !== 'number') {
-    originReplaceState({ _index: window.history.length, ...state }, '')
+    const _index = window.history.length
+    originReplaceState({ _index, ...state }, '')
+    return _index
   }
+  return state._index
 }
 
-export function updateCacheState() {
+export function updateCacheState(index) {
   cacheURL = new URL(window.location.href)
-  cacheIndex = window.history.state._index
+  cacheIndex = index
 }
 
-initState()
-updateCacheState()
+updateCacheState(initState())

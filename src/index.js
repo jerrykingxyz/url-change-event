@@ -3,8 +3,7 @@ import { initState, cacheURL, cacheIndex, updateCacheState } from './stateCache'
 import './override'
 
 window.addEventListener('popstate', function (e) {
-  initState()
-  const nowIndex = window.history.state._index
+  const nowIndex = initState()
   const nowURL = new URL(window.location)
   if (nowIndex === cacheIndex) {
     e.stopImmediatePropagation()
@@ -24,7 +23,7 @@ window.addEventListener('popstate', function (e) {
     window.history.go(cacheIndex - nowIndex)
     return
   }
-  updateCacheState()
+  updateCacheState(nowIndex)
 })
 
 window.addEventListener('beforeunload', function (e) {
